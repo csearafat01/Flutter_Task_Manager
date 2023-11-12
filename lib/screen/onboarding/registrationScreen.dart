@@ -21,23 +21,23 @@ class _registrationScreenState extends State<registrationScreen> {
 
   FormOnSubmit() async{
 
-    if(FormValues['email']!.length==0){
+    if(FormValues['email']!.isEmpty){
       ErrorToast('Email Required !');
     }
 
-    else if(FormValues['firstName']!.length==0){
+    else if(FormValues['firstName']!.isEmpty){
       ErrorToast('First Name Required !');
     }
 
-    else if(FormValues['lastName']!.length==0){
+    else if(FormValues['lastName']!.isEmpty){
       ErrorToast('Last Name Required !');
     }
 
-    else if(FormValues['mobile']!.length==0){
+    else if(FormValues['mobile']!.isEmpty){
       ErrorToast('Mobile No Required !');
     }
 
-    else if(FormValues['password']!.length==0){
+    else if(FormValues['password']!.isEmpty){
       ErrorToast('Mobile No Required !');
     }
     else if(FormValues['password']!=FormValues['cpassword']){
@@ -64,18 +64,18 @@ class _registrationScreenState extends State<registrationScreen> {
           Container(
             alignment: Alignment.center,
             child: SingleChildScrollView(
-                child:Loading?(Center(child: CircularProgressIndicator())):(
+                child:Loading?(const Center(child: CircularProgressIndicator())):(
                     Container(
-                      padding: EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(30),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text("Join With Us", style: Head1Text(colorDarkBlue)),
-                          SizedBox(height: 1),
+                          const SizedBox(height: 1),
                           Text("Learn with rabbil hasan", style: Head6Text(colorLightGray)),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                               decoration: AppInputDecoration("Email Address"),
                               onChanged: (Textvalue){
@@ -83,7 +83,7 @@ class _registrationScreenState extends State<registrationScreen> {
                               }
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                               decoration: AppInputDecoration("First Name"),
                               onChanged: (Textvalue){
@@ -91,7 +91,7 @@ class _registrationScreenState extends State<registrationScreen> {
                               }
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                               decoration: AppInputDecoration("Last Name"),
                               onChanged: (Textvalue){
@@ -99,7 +99,7 @@ class _registrationScreenState extends State<registrationScreen> {
                               }
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                               decoration: AppInputDecoration("Mobile"),
                               onChanged: (Textvalue){
@@ -107,7 +107,7 @@ class _registrationScreenState extends State<registrationScreen> {
                               }
                           ),
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                               decoration: AppInputDecoration("Password"),
                               onChanged: (Textvalue){
@@ -116,7 +116,7 @@ class _registrationScreenState extends State<registrationScreen> {
                           ),
 
 
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                               decoration: AppInputDecoration("Confirm Password"),
                               onChanged: (Textvalue){
@@ -124,14 +124,14 @@ class _registrationScreenState extends State<registrationScreen> {
                               }
                           ),
 
-                          SizedBox(height: 20),
-                          Container(child: ElevatedButton(
+                          const SizedBox(height: 20),
+                          ElevatedButton(
                             style: AppButtonStyle(),
                             child: SuccessButtonChild('Registration'),
                             onPressed: (){
                               FormOnSubmit();
                             },
-                          ),)
+                          )
 
                         ],
                       ),

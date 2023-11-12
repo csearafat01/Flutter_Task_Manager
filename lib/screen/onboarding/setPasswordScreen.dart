@@ -3,16 +3,16 @@ import '../../api/apiClient.dart';
 import '../../style/style.dart';
 import '../../utility/utility.dart';
 
-class setPasswordScreen extends StatefulWidget {
+class SetPasswordScreen extends StatefulWidget {
 
-  const setPasswordScreen({Key? key}) : super(key: key);
+  const SetPasswordScreen({Key? key}) : super(key: key);
   @override
-  State<setPasswordScreen> createState() => _setPasswordScreenState();
+  State<SetPasswordScreen> createState() => _SetPasswordScreenState();
 
 }
 
 
-class _setPasswordScreenState extends State<setPasswordScreen> {
+class _SetPasswordScreenState extends State<SetPasswordScreen> {
 
 
   Map<String,String> FormValues={"email":"", "OTP":"","password":"","cpassword":""};
@@ -38,7 +38,7 @@ class _setPasswordScreenState extends State<setPasswordScreen> {
   }
 
   FormOnSubmit() async{
-    if(FormValues['password']!.length==0){
+    if(FormValues['password']!.isEmpty){
       ErrorToast('Password Required !');
     }
     else if(FormValues['password']!=FormValues['cpassword']){
@@ -64,37 +64,37 @@ class _setPasswordScreenState extends State<setPasswordScreen> {
           ScreenBackground(context),
           Container(
             alignment: Alignment.center,
-            child: Loading?(Center(child: CircularProgressIndicator())):(SingleChildScrollView(
-              padding: EdgeInsets.all(30),
+            child: Loading?(const Center(child: CircularProgressIndicator())):(SingleChildScrollView(
+              padding: const EdgeInsets.all(30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Set Password", style: Head1Text(colorDarkBlue)),
-                  SizedBox(height: 1),
+                  const SizedBox(height: 1),
                   Text("Minimum length password 8 character with Latter and number combination ", style: Head7Text(colorLightGray)),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextFormField(
                     onChanged: (Textvalue){
                       InputOnChange("password",Textvalue);
                     },
                     decoration: AppInputDecoration("Password"),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextFormField(
                     onChanged: (Textvalue){
                       InputOnChange("cpassword",Textvalue);
                     },
                     decoration: AppInputDecoration("Confirm Password"),
                   ),
-                  SizedBox(height: 20),
-                  Container(child: ElevatedButton(
+                  const SizedBox(height: 20),
+                  ElevatedButton(
                     style: AppButtonStyle(),
                     child: SuccessButtonChild('Confirm'),
                     onPressed: (){
                       FormOnSubmit();
                     },
-                  ),)
+                  )
                 ],
               ),
             )),
