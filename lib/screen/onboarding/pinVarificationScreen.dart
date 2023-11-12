@@ -1,17 +1,43 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
+import '../../api/apiClient.dart';
 import '../../style/style.dart';
+import '../../utility/utility.dart';
 
 class pinVerificationScreen extends StatefulWidget {
-  const pinVerificationScreen({super.key});
-
+  const pinVerificationScreen({Key? key}) : super(key: key);
   @override
   State<pinVerificationScreen> createState() => _pinVerificationScreenState();
 }
 
 class _pinVerificationScreenState extends State<pinVerificationScreen> {
+
+  Map<String,String> FormValues={"otp":""};
+  bool Loading=false;
+
+  InputOnChange(MapKey, Textvalue){
+    setState(() {
+      FormValues.update(MapKey, (value) => Textvalue);
+    });
+  }
+
+  FormOnSubmit() async{
+    if(FormValues['otp']!.length!=6){
+      ErrorToast('PIN Required !');
+    }
+    else{
+      setState(() {Loading=true;});
+      String? emailAddress=await ReadUserData('EmailVerification');
+      bool res=await VerifyOTPRequest(emailAddress,FormValues['otp']);
+      if(res==true){
+        Navigator.pushNamed(context, "/setPassword");
+      }
+      else{
+        setState(() {Loading=false;});
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +46,7 @@ class _pinVerificationScreenState extends State<pinVerificationScreen> {
           ScreenBackground(context),
           Container(
             alignment: Alignment.center,
-            child: SingleChildScrollView(
+            child: Loading?(Center(child: CircularProgressIndicator())):(SingleChildScrollView(
               padding: EdgeInsets.all(30),
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -41,18 +67,20 @@ class _pinVerificationScreenState extends State<pinVerificationScreen> {
 
                       },
                       onChanged: (value) {
+                        InputOnChange("otp",value);
                       }
                   ),
                   Container(child: ElevatedButton(
                     style: AppButtonStyle(),
                     child: SuccessButtonChild('Verify'),
                     onPressed: (){
+                      FormOnSubmit();
                     },
                   ),)
                 ],
               ),
-            )
-          ),
+            )),
+          )
         ],
       ),
     );
