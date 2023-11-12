@@ -3,14 +3,14 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../style/style.dart';
 
-class splashScreen extends StatefulWidget {
-  const splashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<splashScreen> createState() => _splashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashScreenState extends State<splashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +18,7 @@ class _splashScreenState extends State<splashScreen> {
         children: [
           ScreenBackground(context),
           Container(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             child: Center(
                 child: SvgPicture.asset("assets/images/logo.svg",alignment: Alignment.center)
             ),
